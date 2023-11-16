@@ -9,4 +9,22 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-recommended',
   ],
+  plugins: [
+    'import',
+    '@typescript-eslint',
+  ],
+  rules: {
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        ts: 'never',
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      typescript: true,
+    },
+  },
 };
