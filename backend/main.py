@@ -1,8 +1,8 @@
-import secrets
-from typing import Annotated, List
+from typing import List
 
-from fastapi import Depends, FastAPI, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi import Depends, FastAPI
+from fastapi.security import HTTPBearer
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from database import database
@@ -12,9 +12,18 @@ from schemas import schemas
 app = FastAPI()
 security = HTTPBearer()
 
+origins = [
+    "http://localhost",
+    "http://localhost:5173",
+]
 
-def get_customer_login(credentials: Annotated[HTTPAuthorizationCredentials, Depends(security)]):
-    return credentials.credentials
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def get_db():
@@ -25,11 +34,20 @@ def get_db():
         db.close()
 
 
-@app.get("/categories/", response_model=List[schemas.Category])
+@app.get("/categories/", response_model=List[schemas.CategoryOut])
 def read_categories(
-    customer_login: Annotated[str, Depends(get_customer_login)],
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(get_db),
 ):
     return repo.get_categories(db, skip=skip, limit=limit)
+
+
+@app.post("/categories/", response_model=schemas.CategoryOut)
+def create_category(
+    params: schemas.CategoryIn,
+    db: Session = Depends(get_db),
+):
+    category = repo.create_category(db, params.title)
+
+    return category

@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 
 
-class Category(BaseModel):
+class CategoryOut(BaseModel):
     id: int
     title: str
 
-    class Config:
-        orm_mode = True
+
+class CategoryIn(BaseModel):
+    title: str
