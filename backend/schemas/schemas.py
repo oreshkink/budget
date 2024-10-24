@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 
 
-class CategoryOut(BaseModel):
+class NoteOut(BaseModel):
     id: int
     title: str
 
 
-class CategoryIn(BaseModel):
+class NoteIn(BaseModel):
     title: str

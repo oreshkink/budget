@@ -34,20 +34,20 @@ def get_db():
         db.close()
 
 
-@app.get("/categories/", response_model=List[schemas.CategoryOut])
-def read_categories(
+@app.get("/notes/", response_model=List[schemas.NoteOut])
+def read_notes(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(get_db),
 ):
-    return repo.get_categories(db, skip=skip, limit=limit)
+    return repo.get_notes(db, skip=skip, limit=limit)
 
 
-@app.post("/categories/", response_model=schemas.CategoryOut)
-def create_category(
-    params: schemas.CategoryIn,
+@app.post("/notes/", response_model=schemas.NoteOut)
+def create_note(
+    params: schemas.NoteIn,
     db: Session = Depends(get_db),
 ):
-    category = repo.create_category(db, params.title)
+    note = repo.create_note(db, params.title)
 
-    return category
+    return note

@@ -1,4 +1,3 @@
-from .category import Category
-from .customer import Customer
+from .note import Note
 
-__all__ = ['Category', 'Customer']
+__all__ = ['Note']
