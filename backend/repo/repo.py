@@ -17,3 +17,9 @@ def create_note(db: Session, title: str) -> Note:
     db.refresh(note)
 
     return note
+
+
+def remove_note(db: Session, id: int):
+    note = db.get(Note, id)
+    db.delete(note)
+    db.commit()

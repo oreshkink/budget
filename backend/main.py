@@ -51,3 +51,11 @@ def create_note(
     note = repo.create_note(db, params.title)
 
     return note
+
+@app.delete("/notes/{note_id}")
+def remove_note(
+    note_id: int,
+    db: Session = Depends(get_db),
+):
+    print("TRY")
+    repo.remove_note(db, note_id)

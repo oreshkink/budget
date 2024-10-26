@@ -3,11 +3,11 @@ import { query } from "../api";
 import type { Note } from "./type";
 
 
-export const QUERY_KEY = ['notes'];
+export const NOTE_QUERY_KEY = ['notes'];
 
 export function useAll() {
   const { data } = useQuery<Note[]>({
-    queryKey: QUERY_KEY,
+    queryKey: NOTE_QUERY_KEY,
     queryFn: query,
   });
 

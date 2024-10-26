@@ -5,12 +5,15 @@
       v-for="note in notes"
     >
       {{ note.title }}
+
+      <RemoveButton :id="note.id"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { notesModel } from '../..';
+import RemoveButton from '../../../../features/notes/remove-btn/ui/RemoveButton.vue';
 
 const { notes } = notesModel.Composables.useAll();
 </script>
