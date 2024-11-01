@@ -6,6 +6,8 @@
     >
       {{ note.title }}
 
+      {{ note.created_at }}
+
       <RemoveButton :id="note.id"/>
     </div>
   </div>

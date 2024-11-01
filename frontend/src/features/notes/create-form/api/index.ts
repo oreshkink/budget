@@ -8,7 +8,5 @@ export async function create(noteParams: { title: string }) {
   });
   const json = await response.json();
 
-  console.log(json);
-
   return json;
 }
