@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.56.2",
+    "@trpc/client": "^11.0.0-rc.608",
+    "@trpc/server": "^11.0.0-rc.608",
     "vue": "^3.5.12"
   },
   "devDependencies": {
