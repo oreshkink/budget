@@ -1,19 +1,11 @@
 <script lang="ts" setup>
-import { ref, useTemplateRef } from 'vue';
-import * as api from '../api';
-import { useMutation, useQueryClient } from '@tanstack/vue-query';
-import { NOTE_QUERY_KEY } from '../../../../entities/note/model/composables';
+import { ref, useTemplateRef } from "vue";
+
+import { useCreateMutation } from "../model";
 
 const noteTitle = ref<string>();
-const form = useTemplateRef('form');
-const queryClient = useQueryClient();
-
-const addMutation = useMutation({
-  mutationFn: api.create,
-  onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: NOTE_QUERY_KEY })
-  }
-});
+const form = useTemplateRef("form");
+const createMutation = useCreateMutation();
 
 async function onSubmit(e: SubmitEvent) {
   e.preventDefault();
@@ -22,18 +14,14 @@ async function onSubmit(e: SubmitEvent) {
     return;
   }
 
-  try {
-    await addMutation.mutateAsync({ title: noteTitle.value });
-  } catch (error) {
-    return;
-  }
+  await createMutation.mutateAsync({ title: noteTitle.value });
 
   form.value?.reset();
 }
 </script>
 
 <template>
-  <form @submit="onSubmit" ref="form" class="create-form">
+  <form ref="form" class="create-form" @submit="onSubmit">
     <textarea v-model="noteTitle"></textarea>
 
     <button type="submit">Сохранить</button>

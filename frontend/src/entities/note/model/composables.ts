@@ -1,15 +1,16 @@
 import { useQuery } from "@tanstack/vue-query";
-import { query } from "../api";
 
-export const NOTE_QUERY_KEY = ['notes'];
+import { trpc } from "../../../trpc";
+
+export const NOTE_QUERY_KEY = ["notes"];
 
 export function useAll() {
   const { data } = useQuery({
     queryKey: NOTE_QUERY_KEY,
-    queryFn: query,
+    queryFn: () => trpc.getNotes.query(),
   });
 
   return {
     notes: data,
-  }
+  };
 }
