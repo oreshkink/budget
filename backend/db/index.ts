@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { notesTable } from './schema';
+import { notesTable, tagsTable } from './schema';
 import { eq } from 'drizzle-orm';
 
 const db = drizzle(process.env.DATABASE_URL!);
@@ -18,4 +18,8 @@ export function createNote(params: { title: string }) {
     title: params.title,
     createdAt: new Date().toISOString(),
   });
+}
+
+export function getTags() {
+  return db.select().from(tagsTable);
 }

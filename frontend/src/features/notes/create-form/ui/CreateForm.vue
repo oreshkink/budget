@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, useTemplateRef } from "vue";
 
+import TagsList from "../../../../entities/tag/ui/list/TagsList.vue";
 import { useCreateMutation } from "../model";
 
 const noteTitle = ref<string>();
@@ -23,6 +24,8 @@ async function onSubmit(e: SubmitEvent) {
 <template>
   <form ref="form" class="create-form" @submit="onSubmit">
     <textarea v-model="noteTitle"></textarea>
+
+    <TagsList />
 
     <button type="submit">Сохранить</button>
   </form>

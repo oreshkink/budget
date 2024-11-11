@@ -4,6 +4,9 @@ import { z } from 'zod';
 
 export const t = initTRPC.create();
 export const appRouter = t.router({
+  getTags: t.procedure.query(() => {
+    return db.getTags();
+  }),
   getNotes: t.procedure.query(() => {
     return db.getNotes();
   }),

@@ -14,3 +14,11 @@ export const notesTable = pgTable(
     }
   }
 );
+
+export const tagsTable = pgTable(
+  "tag",
+  {
+    id: serial().primaryKey().notNull(),
+    title: varchar(),
+  },
+);
