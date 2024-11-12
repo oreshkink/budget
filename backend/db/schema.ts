@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, varchar, index, serial, timestamp } from "drizzle-orm/pg-core"
+import { pgTable, varchar, index, serial, timestamp, integer, primaryKey } from "drizzle-orm/pg-core"
 
 export const notesTable = pgTable(
   "note",
@@ -21,4 +21,19 @@ export const tagsTable = pgTable(
     id: serial().primaryKey().notNull(),
     title: varchar(),
   },
+);
+
+export const notesToTagsTable = pgTable(
+  'notes_to_tags',
+  {
+    noteId: integer('note_id')
+      .notNull()
+      .references(() => notesTable.id),
+    tagId: integer('tag_id')
+      .notNull()
+      .references(() => tagsTable.id),
+  },
+  (t) => ({
+    pk: primaryKey({ columns: [t.noteId, t.tagId] }),
+  }),
 );

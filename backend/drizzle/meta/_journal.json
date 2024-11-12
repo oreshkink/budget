@@ -15,6 +15,13 @@
       "when": 1731355771355,
       "tag": "0001_funny_unicorn",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1731440186084,
+      "tag": "0002_nappy_black_tarantula",
+      "breakpoints": true
     }
   ]
 }
