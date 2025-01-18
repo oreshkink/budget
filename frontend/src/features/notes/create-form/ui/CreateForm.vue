@@ -5,6 +5,7 @@ import TagsList from "../../../../entities/tag/ui/list/TagsList.vue";
 import { useCreateMutation } from "../model";
 
 const noteTitle = ref<string>();
+const tagsIds = ref<Set<number>>(new Set());
 const form = useTemplateRef("form");
 const createMutation = useCreateMutation();
 
@@ -15,7 +16,10 @@ async function onSubmit(e: SubmitEvent) {
     return;
   }
 
-  await createMutation.mutateAsync({ title: noteTitle.value });
+  await createMutation.mutateAsync({
+    title: noteTitle.value,
+    tagsIds: [...tagsIds.value],
+  });
 
   form.value?.reset();
 }
@@ -25,7 +29,7 @@ async function onSubmit(e: SubmitEvent) {
   <form ref="form" class="create-form" @submit="onSubmit">
     <textarea v-model="noteTitle"></textarea>
 
-    <TagsList />
+    <TagsList :model-value="tagsIds" />
 
     <button type="submit">Сохранить</button>
   </form>

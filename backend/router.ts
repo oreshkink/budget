@@ -8,7 +8,7 @@ export const appRouter = t.router({
     return db.getTags();
   }),
   getNotes: t.procedure.query(() => {
-    return db.getNotes();
+    return db.getNotesWithTags();
   }),
   removeNoteById: t.procedure
     .input(z.number())
@@ -17,10 +17,11 @@ export const appRouter = t.router({
   }),
   createNote: t.procedure
     .input(z.object({
-      title: z.string()
+      title: z.string(),
+      tagsIds: z.array(z.number()),
     }))
     .mutation((opts) => {
-      return db.createNote(opts.input);
+      return db.createNoteWithTags(opts.input);
     })
 });
 

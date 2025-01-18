@@ -1,9 +1,13 @@
 <template>
   <div class="notes-list">
     <article v-for="note in notes" :key="note.id" class="notes-list__item">
-      {{ note.title }}
+      <!-- {{ note.title }} -->
 
       {{ note.createdAt }}
+
+      <template v-for="tag in note.tags">
+        {{ tag.title }}
+      </template>
 
       <RemoveButton :id="note.id" />
     </article>
