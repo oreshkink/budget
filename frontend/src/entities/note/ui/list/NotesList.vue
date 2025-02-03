@@ -1,7 +1,7 @@
 <template>
   <div class="notes-list">
     <article v-for="note in notes" :key="note.id" class="notes-list__item">
-      <!-- {{ note.title }} -->
+      {{ note.title }}
 
       {{ note.createdAt }}
 

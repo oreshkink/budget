@@ -26,7 +26,15 @@ async function onSubmit(e: SubmitEvent) {
 </script>
 
 <template>
-  <form ref="form" class="create-form" @submit="onSubmit">
+  <form
+    ref="form"
+    class="create-form"
+    @submit="
+      (e: Event) => {
+        onSubmit(e as SubmitEvent);
+      }
+    "
+  >
     <textarea v-model="noteTitle"></textarea>
 
     <TagsList :model-value="tagsIds" />

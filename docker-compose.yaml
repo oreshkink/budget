@@ -1,4 +1,22 @@
 services:
+  backend:
+    profiles: [app]
+    depends_on: [db]
+    build:
+      context: backend
+    volumes:
+      - ./backend/dist:/app/dist
+    command: npm run dev
+    ports:
+      - '4000:4000'
+
+  frontend:
+    profiles: [app]
+    build:
+      context: frontend
+    ports:
+      - '5173:80'
+
   db:
     image: postgres:16.6
     restart: always
